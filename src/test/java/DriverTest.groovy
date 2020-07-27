@@ -24,13 +24,6 @@ class DriverTest extends Specification{
         driver?.quit()
     }
 
-    /* Pesquisar produtos
-
-        1. Abre o navegador e acessa 'https://www.mercadolivre.com.br'.
-        2. Digita na caixa de pesquisa o produto 'Panela de Pressão'.
-        3. Localiza um dos elementos da pesquisa, e verifica se é pertinente ao que foi pesquisado.
-     */
-
     def "Acessar Carrinho de compras"(){
 
         expect: "Usuário deverá conseguir acessar seu 'Carrinho de compras'"
@@ -38,11 +31,18 @@ class DriverTest extends Specification{
         btCarrinho.click()
     }
 
+    /* Pesquisar produtos
+
+    1. Abre o navegador e acessa 'https://www.mercadolivre.com.br'.
+    2. Digita na caixa de pesquisa o produto 'Panela de Pressão'.
+    3. Localiza um dos elementos da pesquisa, e verifica se é pertinente ao que foi pesquisado.
+    */
+
     def "Pesquisar Produto"() {
 
         expect: "Usuario deverá digitar um produto, e a pesquisa deverá retornar corretamente"
         WebElement caixaDeBusca = driver.findElement(By.name("as_word"))
-        caixaDeBusca.sendKeys("Panela de pressão")
+        caixaDeBusca.sendKeys(Produtos.PLAYSTATION.descricao)
 
         WebElement btPesquisar = driver.findElement(By.className("nav-search-btn"));
         btPesquisar.click();
@@ -50,7 +50,6 @@ class DriverTest extends Specification{
         WebElement resultadoPesquisa = driver.findElement(By.className("main-title"));
         String resultado = resultadoPesquisa.getText();
 
-        assert(resultado.toLowerCase().contains("panela"))
-        assert(resultado.toLowerCase().contains("pressão"))
+        assert(resultado.toLowerCase().contains("playstation"))
     }
 }
