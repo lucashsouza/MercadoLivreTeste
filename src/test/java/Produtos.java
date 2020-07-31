@@ -3,13 +3,13 @@ import java.util.List;
 
 public enum Produtos {
 
-    PLAYSTATION ("Playstation"),
-    FOGÃO ("Fogão"),
-    GELADEIRA ("Geladeira"),
-    IMPRESSORA ("Impressora"),
-    NOTEBOOK ("Notebook"),
-    CANECA ("Caneca"),
-    MESA ("Mesa");
+    PLAYSTATION ("playstation"),
+    FOGAO ("fogão"),
+    GELADEIRA ("geladeira"),
+    IMPRESSORA ("impressora"),
+    NOTEBOOK ("notebook"),
+    CANECA ("caneca"),
+    MESA ("mesa");
 
     protected String descricao;
 

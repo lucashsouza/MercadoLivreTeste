@@ -24,6 +24,14 @@ class DriverTest extends Specification{
         driver?.quit()
     }
 
+    def "Limpar caixa de busca"(){
+        expect:
+        WebElement caixaDeBusca = driver.findElement(By.name("as_word"))
+        caixaDeBusca.sendKeys("teste")
+        caixaDeBusca.clear()
+
+    }
+
     def "Acessar Carrinho de compras"(){
 
         expect: "Usuário deverá conseguir acessar seu 'Carrinho de compras'"
@@ -34,22 +42,74 @@ class DriverTest extends Specification{
     /* Pesquisar produtos
 
     1. Abre o navegador e acessa 'https://www.mercadolivre.com.br'.
-    2. Digita na caixa de pesquisa o produto 'Panela de Pressão'.
+    2. Digita na caixa de pesquisa os produtos do enum 'Produtos'.
     3. Localiza um dos elementos da pesquisa, e verifica se é pertinente ao que foi pesquisado.
     */
 
-    def "Pesquisar Produto"() {
-
+    def "Pesquisar Produtos"() {
         expect: "Usuario deverá digitar um produto, e a pesquisa deverá retornar corretamente"
-        WebElement caixaDeBusca = driver.findElement(By.name("as_word"))
-        caixaDeBusca.sendKeys(Produtos.PLAYSTATION.descricao)
 
-        WebElement btPesquisar = driver.findElement(By.className("nav-search-btn"));
-        btPesquisar.click();
+        // Playstation
+        driver.findElement(By.name("as_word")).sendKeys(Produtos.PLAYSTATION.getDescricao())
+        driver.findElement(By.className("nav-search-btn")).click();
+        driver.findElement(By.className("main-title")).getText().toLowerCase()
+        assert(driver.findElement(By.className("main-title"))
+                .getText().toLowerCase().contains
+                (Produtos.PLAYSTATION.getDescricao()))
+        driver.navigate().back()
 
-        WebElement resultadoPesquisa = driver.findElement(By.className("main-title"));
-        String resultado = resultadoPesquisa.getText();
+        // Fogão
+        driver.findElement(By.name("as_word")).sendKeys(Produtos.FOGAO.getDescricao())
+        driver.findElement(By.className("nav-search-btn")).click();
+        driver.findElement(By.className("main-title")).getText().toLowerCase()
+        assert(driver.findElement(By.className("main-title"))
+                .getText().toLowerCase().contains
+                (Produtos.FOGAO.getDescricao()))
+        driver.navigate().back()
 
-        assert(resultado.toLowerCase().contains("playstation"))
+        // Geladeira
+        driver.findElement(By.name("as_word")).sendKeys(Produtos.GELADEIRA.getDescricao())
+        driver.findElement(By.className("nav-search-btn")).click();
+        driver.findElement(By.className("main-title")).getText().toLowerCase()
+        assert(driver.findElement(By.className("main-title"))
+                .getText().toLowerCase().contains
+                (Produtos.GELADEIRA.getDescricao()))
+        driver.navigate().back()
+
+        // Impressora
+        driver.findElement(By.name("as_word")).sendKeys(Produtos.IMPRESSORA.getDescricao())
+        driver.findElement(By.className("nav-search-btn")).click();
+        driver.findElement(By.className("main-title")).getText().toLowerCase()
+        assert(driver.findElement(By.className("main-title"))
+                .getText().toLowerCase().contains
+                (Produtos.IMPRESSORA.getDescricao()))
+        driver.navigate().back()
+
+        // Notebook
+        driver.findElement(By.name("as_word")).sendKeys(Produtos.NOTEBOOK.getDescricao())
+        driver.findElement(By.className("nav-search-btn")).click();
+        driver.findElement(By.className("main-title")).getText().toLowerCase()
+        assert(driver.findElement(By.className("main-title"))
+                .getText().toLowerCase().contains
+                (Produtos.NOTEBOOK.getDescricao()))
+        driver.navigate().back()
+
+        // Caneca
+        driver.findElement(By.name("as_word")).sendKeys(Produtos.CANECA.getDescricao())
+        driver.findElement(By.className("nav-search-btn")).click();
+        driver.findElement(By.className("main-title")).getText().toLowerCase()
+        assert(driver.findElement(By.className("main-title"))
+                .getText().toLowerCase().contains
+                (Produtos.CANECA.getDescricao()))
+        driver.navigate().back()
+
+        // Mesa
+        driver.findElement(By.name("as_word")).sendKeys(Produtos.MESA.getDescricao())
+        driver.findElement(By.className("nav-search-btn")).click();
+        driver.findElement(By.className("main-title")).getText().toLowerCase()
+        assert(driver.findElement(By.className("main-title"))
+                .getText().toLowerCase().contains
+                (Produtos.MESA.getDescricao()))
+        driver.navigate().back()
     }
 }
